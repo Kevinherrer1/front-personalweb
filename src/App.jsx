@@ -4,11 +4,13 @@ function App() {
   const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/hola") // Asegúrate que esta ruta exista en tu backend NestJS
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    fetch(`${API_URL}/hola`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);         // { mensaje: "Hola mundo" }
-        setMensaje(data.mensaje); // Guardamos el mensaje en el estado
+        console.log(data);
+        setMensaje(data.mensaje);
       })
       .catch((error) => {
         console.error("Error al hacer fetch:", error);
