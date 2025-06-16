@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './portfolio.css';
-import avatar from './assets/avatar.png'; 
+import avatar from './assets/avatar.png';
 import { Link } from 'react-router-dom';
 
-
-
 function Portfolio() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(prev => !prev);
+    };
+
     return (
         <div className="container">
             <aside className="menu">
@@ -25,11 +29,34 @@ function Portfolio() {
                 </ul>
             </aside>
 
-
             <main className="content">
+                {/* Botón para móvil */}
+                <button className="menu-toggle" onClick={toggleMenu}>
+                    ☰ Menú
+                </button>
+                {/* Menú móvil siempre en el DOM */}
+                <div className="mobile-menu-wrapper">
+                    <nav className={`menu mobile-menu ${menuOpen ? 'show' : ''}`}>
+                        <ul>
+                            <li>
+                                <Link to="/" onClick={() => setMenuOpen(false)}>INICIO</Link></li>
+                            <li>
+                                <Link to="/habilidades" onClick={() => setMenuOpen(false)}>HABILIDADES</Link>
+                            </li>
+                            <li>
+                                <Link to="/proyectos" onClick={() => setMenuOpen(false)}>PROYECTOS</Link>
+                            </li>
+                            <li>
+                                <Link to="/contacto" onClick={() => setMenuOpen(false)}>CONTACTO</Link>
+                            </li>
+                            </ul>
+                        
+                    </nav>
+                </div>
+
                 <h1>»» BIENVENIDO ««</h1>
                 <div className="profile">
-                    {<img src={avatar} alt="Avatar de Kevin" />}
+                    <img src={avatar} alt="Avatar de Kevin" />
                     <div className="info">
                         <h2>Kevin Herrera</h2>
                         <ul>
