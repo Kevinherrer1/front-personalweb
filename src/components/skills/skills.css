@@ -1,3 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1600px;
+  background-color: transparent;
+  transform: scale(1);
+  gap: 1rem;
+}
+
 .skills-container {
   padding: 2rem;
   background-color: #d6c5a9;
@@ -5,6 +20,7 @@
   box-shadow: 8px 8px 0 #000;
   font-family: 'Press Start 2P', cursive;
   color: #222;
+  width: clamp(70%, 75vw, 1000px);
 }
 
 .skills-grid {
@@ -32,7 +48,6 @@
   width: 28px;
   height: 28px;
 }
-
 
 .menu {
   width: 210px;
@@ -67,4 +82,82 @@
   position: absolute;
   left: 0;
   color: #90ee90;
+}
+
+/* Ocultar menú móvil y botón hamburguesa por defecto (versión escritorio) */
+.menu-toggle,
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .menu {
+        display: none; /* Oculta el menú lateral en móvil */
+    }
+
+    .skills-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .menu-toggle {
+        display: block;
+        background-color: #561445;
+        color: white;
+        font-size: 1.5rem;
+        border: none;
+        padding: 10px 20px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+    }
+    
+    .mobile-menu {
+        display: none;
+        background-color: #111;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .mobile-menu.show {
+        display: block;
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-menu li {
+        margin: 0;
+        padding: 10px 0;
+        list-style: none;
+        text-align: center;
+        border-bottom: 1px solid #444;
+    }
+    
+    .mobile-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+    }
 }

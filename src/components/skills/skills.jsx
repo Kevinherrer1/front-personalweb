@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './skills.css';
 import { Link } from 'react-router-dom';
 import vue from './assets/vue.png'; 
@@ -13,6 +13,12 @@ import ubuntu from './assets/ubuntu.png';
 import windows from './assets/windows.png';
 
 function Skills() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(prev => !prev);
+    };
+
     return (
 
         <div className='container'>
@@ -36,6 +42,28 @@ function Skills() {
 
 
             <div className="skills-container">
+                {/* Botón para móvil */}
+                <button className="menu-toggle" onClick={toggleMenu}>
+                    ☰ Menú
+                </button>
+                {/* Menú móvil siempre en el DOM */}
+                <div className="mobile-menu-wrapper">
+                    <nav className={`menu mobile-menu ${menuOpen ? 'show' : ''}`}>
+                        <ul>
+                            <li>
+                                <Link to="/" onClick={() => setMenuOpen(false)}>INICIO</Link></li>
+                            <li>
+                                <Link to="/habilidades" onClick={() => setMenuOpen(false)}>HABILIDADES</Link>
+                            </li>
+                            <li>
+                                <Link to="/proyectos" onClick={() => setMenuOpen(false)}>PROYECTOS</Link>
+                            </li>
+                            <li>
+                                <Link to="/contacto" onClick={() => setMenuOpen(false)}>CONTACTO</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
                 <h1>»» HABILIDADES ««</h1>
                 <div className="skills-grid">
                     <div>

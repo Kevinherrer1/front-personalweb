@@ -1,26 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Press Start 2P', cursive;
-  background: linear-gradient(to bottom, #76c442, #0f6e5a);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-}
-
 .container {
   display: flex;
+  flex-direction: row;
   max-width: 1600px;
   background-color: transparent;
-  transform: scale(1.4);
+  transform: scale(1);
+  gap: 1rem;
 }
 
 .menu {
@@ -65,9 +49,7 @@ body {
   border: 4px solid #000;
   box-shadow: 6px 6px 0 #000;
   flex-grow: 1;
-  width: 90vw;
-  max-width: 1000px;
-  min-width: 320px;
+  width: clamp(70%, 75vw, 1000px);
   min-height: 400px;
   height: auto;
   position: relative;
@@ -138,5 +120,94 @@ h1 {
   width: 61px;
   vertical-align: middle;
   margin-right: 8px;
+}
+
+/* Ocultar menú móvil y botón hamburguesa por defecto (versión escritorio) */
+.menu-toggle,
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        transform: scale(1);
+    }
+
+    .menu {
+        display: none; /* Oculta el menú lateral en móvil */
+    }
+
+    .content {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .menu-toggle {
+        display: block;
+        background-color: #561445;
+        color: white;
+        font-size: 1.5rem;
+        border: none;
+        padding: 10px 20px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+    }
+    
+    .mobile-menu {
+        display: none;
+        background-color: #111;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .mobile-menu.show {
+        display: block;
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-menu li {
+        margin: 0;
+        padding: 10px 0;
+        list-style: none;
+        text-align: center;
+        border-bottom: 1px solid #444;
+    }
+    
+    .mobile-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+    }
+
+    .contact-body {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .avatar {
+        margin-bottom: 1rem;
+    }
 }
 

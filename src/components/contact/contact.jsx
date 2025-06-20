@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './contact.css';
 import avatar from './assets/avatar2.JPG';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,12 @@ import gmail from './assets/gmail.png';
 import github from './assets/github.png';
 
 function Contact() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+      setMenuOpen(prev => !prev);
+  };
+
   return (
     <div className="container">
       <aside className="menu">
@@ -27,6 +33,26 @@ function Contact() {
       </aside>
 
       <main className="content">
+        <button className="menu-toggle" onClick={toggleMenu}>
+            ☰ Menú
+        </button>
+        <div className="mobile-menu-wrapper">
+            <nav className={`menu mobile-menu ${menuOpen ? 'show' : ''}`}>
+                <ul>
+                    <li>
+                        <Link to="/" onClick={() => setMenuOpen(false)}>INICIO</Link></li>
+                    <li>
+                        <Link to="/habilidades" onClick={() => setMenuOpen(false)}>HABILIDADES</Link>
+                    </li>
+                    <li>
+                        <Link to="/proyectos" onClick={() => setMenuOpen(false)}>PROYECTOS</Link>
+                    </li>
+                    <li>
+                        <Link to="/contacto" onClick={() => setMenuOpen(false)}>CONTACTO</Link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <h1>≫ CONTACTO ≪</h1>
         <div className="contact-body">
           <img src={avatar} alt="Avatar" className="avatar" />
