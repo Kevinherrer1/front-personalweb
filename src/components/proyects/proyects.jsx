@@ -1,21 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './proyects.css';
 import { Link } from 'react-router-dom';
 import githubIcon from './assets/githubicon.png';
-
-
+import { API_ENDPOINTS } from '../../config/api';
 
 function Proyects() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                const response = await fetch(API_ENDPOINTS.PROJECTS);
+                if (!response.ok) {
+                    throw new Error('No se pudieron cargar los proyectos desde el servidor.');
+                }
+                const data = await response.json();
+                setProjects(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, []);
 
     const toggleMenu = () => {
         setMenuOpen(prev => !prev);
     };
 
     return (
-
         <div className='container'>
-
             <aside className="menu">
                 <ul>
                     <li className="active">
@@ -32,7 +53,6 @@ function Proyects() {
                     </li>
                 </ul>
             </aside>
-
 
             <div className="proyects-container">
                 {/* Botón para móvil */}
@@ -59,53 +79,19 @@ function Proyects() {
                 </div>
                 <h1>»» PROYECTOS ««</h1>
                 <div className="proyects-lista">
-
-                    <div className="proyecto">
-                        <img src={githubIcon} alt="GitHub" className="icon" />
-                        <div>
-                            <a href="https://github.com/Kevinherrer1/JuegoDamas_Q-Learning" target="_blank" rel="noopener noreferrer">
-                                <strong className="titulo-proyecto">• JuegoDamas_Q-Learning</strong>
-                            </a>
-                            <p>
-                                Implemnetación de un agente autónomo capaz de jugar Damas en un tablero reducido de 4x4, utilizando el algoritmo Q-Learning para mejorar su rendimiento a medida que juega más partidas.
-                            </p>
+                    {loading && <p>Cargando proyectos...</p>}
+                    {error && <p className="error-mensaje">{error}</p>}
+                    {!loading && !error && projects.map(project => (
+                        <div className="proyecto" key={project.id}>
+                            <img src={githubIcon} alt="GitHub" className="icon" />
+                            <div>
+                                <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
+                                    <strong className="titulo-proyecto">• {project.title}</strong>
+                                </a>
+                                <p>{project.description}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="proyecto">
-                        <img src={githubIcon} alt="GitHub" className="icon" />
-                        <div>
-                            <a href="https://github.com/Kevinherrer1/JuegoDamas_Agente" target="_blank" rel="noopener noreferrer">
-                                <strong className="titulo-proyecto">• JuegoDamas_Agente</strong>
-                            </a>
-                            <p>
-                                Juego de Damas implementado en Python, donde puedes jugar contra una Inteligencia Artificial (IA) utilizando el algoritmo Minimax
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="proyecto">
-                        <img src={githubIcon} alt="GitHub" className="icon" />
-                        <div>
-                            <a href="https://github.com/Kevinherrer1/ProyectoIO_IA" target="_blank" rel="noopener noreferrer">
-                                <strong className="titulo-proyecto">• ProyectoIO_IA</strong>
-                            </a>
-                            <p>
-                                Este repositorio contiene un script en Python que utiliza un modelo de aprendizaje automático para predecir el tiempo de entrega en un servicio de delivery.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div className="proyecto">
-                        <img src={githubIcon} alt="GitHub" className="icon" />
-                        <div>
-                            <a href="https://github.com/Callaquenoveo/Proyecto-Cassandra" target="_blank" rel="noopener noreferrer">
-                                <strong className="titulo-proyecto">• Proyecto-Cassandra</strong>
-                            </a>
-                            <p>
-                                Sistema de gestión de supermercado desarrollado con Flask y Cassandra. Permite la gestión de clientes, productos y facturas.
-                            </p>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </div>
