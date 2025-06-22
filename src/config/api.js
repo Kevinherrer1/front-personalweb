@@ -1,5 +1,5 @@
 // Configuración de la API para diferentes entornos
-const API_BASE_URL = 'http://localhost:3000'; // Asegúrate de que este sea el puerto correcto de tu API
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export const API_ENDPOINTS = {
   BASE_URL: API_BASE_URL,
