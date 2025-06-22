@@ -9,43 +9,11 @@
 .container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   max-width: 1600px;
   background-color: transparent;
   transform: scale(1);
   gap: 1rem;
-}
-
-.menu {
-  width: 210px;
-  background-color: #111;
-  padding: 20px;
-  box-shadow: 8px 8px 0 #000;
-  border-right: 6px solid #222;
-  flex-shrink: 0;
-}
-
-.menu ul {
-  list-style: none;
-}
-
-.menu li {
-  color: white;
-  margin-bottom: 30px;
-  cursor: pointer;
-  position: relative;
-  padding-left: 24px;
-  font-size: 14px;
-}
-
-.menu .active {
-  color: #90ee90;
-}
-
-.menu .active::before {
-  content: '➤';
-  position: absolute;
-  left: 0;
-  color: #90ee90;
 }
 
 .content {

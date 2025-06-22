@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './proyects.css';
+import '../menu/menu.css';
+import Menu from '../menu/Menu';
 import { Link } from 'react-router-dom';
 import githubIcon from './assets/githubicon.png';
 import { API_ENDPOINTS } from '../../config/api';
@@ -38,20 +40,7 @@ function Proyects() {
     return (
         <div className='container'>
             <aside className="menu">
-                <ul>
-                    <li className="active">
-                        <Link to="/">INICIO</Link>
-                    </li>
-                    <li>
-                        <Link to="/habilidades">HABILIDADES</Link>
-                    </li>
-                    <li>
-                        <Link to="/proyectos">PROYECTOS</Link>
-                    </li>
-                    <li>
-                        <Link to="/contacto">CONTACTO</Link>
-                    </li>
-                </ul>
+                <Menu />
             </aside>
 
             <div className="proyects-container">
@@ -62,19 +51,7 @@ function Proyects() {
                 {/* Menú móvil siempre en el DOM */}
                 <div className="mobile-menu-wrapper">
                     <nav className={`menu mobile-menu ${menuOpen ? 'show' : ''}`}>
-                        <ul>
-                            <li>
-                                <Link to="/" onClick={() => setMenuOpen(false)}>INICIO</Link></li>
-                            <li>
-                                <Link to="/habilidades" onClick={() => setMenuOpen(false)}>HABILIDADES</Link>
-                            </li>
-                            <li>
-                                <Link to="/proyectos" onClick={() => setMenuOpen(false)}>PROYECTOS</Link>
-                            </li>
-                            <li>
-                                <Link to="/contacto" onClick={() => setMenuOpen(false)}>CONTACTO</Link>
-                            </li>
-                        </ul>
+                        <Menu isMobile={true} onLinkClick={() => setMenuOpen(false)} />
                     </nav>
                 </div>
                 <h1>»» PROYECTOS ««</h1>

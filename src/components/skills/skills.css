@@ -7,6 +7,7 @@
 .container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   max-width: 1600px;
   background-color: transparent;
   transform: scale(1);
@@ -49,41 +50,6 @@
   height: 28px;
 }
 
-.menu {
-  width: 210px;
-  height: 210px;
-  margin-top: 130px;
-  background-color: #111;
-  padding: 20px;
-  box-shadow: 8px 8px 0 #000;
-  margin-right: 20px;
-  border-right: 6px solid #222;
-}
-
-.menu ul {
-  list-style: none;
-}
-
-.menu li {
-  color: white;
-  margin-bottom: 30px;
-  cursor: pointer;
-  position: relative;
-  padding-left: 24px;
-  font-size: 14px;
-}
-
-.menu .active {
-  color: #90ee90;
-}
-
-.menu .active::before {
-  content: '➤';
-  position: absolute;
-  left: 0;
-  color: #90ee90;
-}
-
 /* Ocultar menú móvil y botón hamburguesa por defecto (versión escritorio) */
 .menu-toggle,
 .mobile-menu {
@@ -95,10 +61,6 @@
         flex-direction: column;
         align-items: center;
         padding: 1rem;
-    }
-
-    .menu {
-        display: none; /* Oculta el menú lateral en móvil */
     }
 
     .skills-container {
