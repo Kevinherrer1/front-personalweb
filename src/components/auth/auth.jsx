@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { API_ENDPOINTS } from '../../config/api';
 import './auth.css';
-import '../menu/menu.css';
+import '../menu/Menu.css';
 import Menu from '../menu/Menu';
 
 function Auth() {
