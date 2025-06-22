@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import './Menu.css';
 import { useAuth } from '../../context/AuthContext';
-import './menu.css';
 
 function Menu({ isMobile, onLinkClick }) {
     const location = useLocation();

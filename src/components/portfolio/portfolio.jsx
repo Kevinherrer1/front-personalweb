@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './portfolio.css';
-import '../menu/menu.css';
+import '../menu/Menu.css';
 import Menu from '../menu/Menu';
 import avatar from './assets/avatar.png';
 import { Link } from 'react-router-dom';

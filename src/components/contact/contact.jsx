@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { API_ENDPOINTS } from '../../config/api';
 import './contact.css';
-import '../menu/menu.css';
+import '../menu/Menu.css';
 import Menu from '../menu/Menu';
 import avatar from './assets/avatar2.JPG';
 import linkedin from './assets/linkedin.png';

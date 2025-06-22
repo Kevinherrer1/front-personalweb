@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './proyects.css';
-import '../menu/menu.css';
+import '../menu/Menu.css';
 import Menu from '../menu/Menu';
 import { Link } from 'react-router-dom';
 import githubIcon from './assets/githubicon.png';
