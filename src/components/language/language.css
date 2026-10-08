@@ -1,0 +1,28 @@
+.language-toggle {
+  display: inline-flex;
+  flex-shrink: 0;
+  border: 3px solid #000;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.language-toggle button {
+  padding: 7px 9px;
+  background-color: var(--color-menu);
+  color: var(--color-menu-text);
+  border: none;
+  font-size: 10px;
+  transition: background-color var(--duration) var(--ease-out), color var(--duration) var(--ease-out);
+}
+
+.language-toggle button + button {
+  border-left: 3px solid #000;
+}
+
+.language-toggle button:hover {
+  color: var(--color-highlight);
+}
+
+.language-toggle button.active {
+  background-color: var(--color-active);
+  color: #111;
+}

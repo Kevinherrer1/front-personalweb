@@ -1,86 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BrainCircuit, CodeXml, Database, Monitor, Server, Wrench } from 'lucide-react';
 import './skills.css';
-import '../menu/Menu.css';
-import Menu from '../menu/Menu';
-import { Link } from 'react-router-dom';
-import { API_ENDPOINTS } from '../../config/api';
-import vue from './assets/vue.png';
-import windows from './assets/windows.png';
+import Layout from '../layout/Layout';
+import { useLanguage } from '../../i18n/useLanguage';
+import skills from '../../data/skills.json';
+
+const categoryIcons = {
+    backend: Server,
+    frontend: Monitor,
+    languages: CodeXml,
+    ai: BrainCircuit,
+    databases: Database,
+    tools: Wrench,
+};
+
+const skillIcons = {
+    BrainCircuit,
+};
+
+const groupedSkills = skills.reduce((acc, skill) => {
+    if (!acc[skill.category]) {
+        acc[skill.category] = [];
+    }
+    acc[skill.category].push(skill);
+    return acc;
+}, {});
 
 function Skills() {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [skills, setSkills] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchSkills = async () => {
-            try {
-                setError(null);
-                setLoading(true);
-                const response = await fetch(API_ENDPOINTS.TECHNOLOGIES);
-                if (!response.ok) {
-                    throw new Error('No se pudieron cargar las habilidades desde el servidor.');
-                }
-                const data = await response.json();
-                setSkills(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchSkills();
-    }, []);
-
-    const toggleMenu = () => {
-        setMenuOpen(prev => !prev);
-    };
-
-    const groupedSkills = skills.reduce((acc, skill) => {
-        const category = skill.category;
-        if (!acc[category]) {
-            acc[category] = [];
-        }
-        acc[category].push(skill);
-        return acc;
-    }, {});
+    const { t, tr } = useLanguage();
 
     return (
-        <div className='container'>
-            <aside className="menu">
-                <Menu />
-            </aside>
-
-            <div className="skills-container">
-                <button className="menu-toggle" onClick={toggleMenu}>
-                    ☰ Menú
-                </button>
-                <div className="mobile-menu-wrapper">
-                    <nav className={`menu mobile-menu ${menuOpen ? 'show' : ''}`}>
-                        <Menu isMobile={true} onLinkClick={() => setMenuOpen(false)} />
-                    </nav>
-                </div>
-                <h1>»» HABILIDADES ««</h1>
-                <div className="skills-grid">
-                    {loading && <p>Cargando habilidades...</p>}
-                    {error && <p className="error-mensaje">{error}</p>}
-                    {!loading && !error &&
-                        Object.entries(groupedSkills).map(([category, skillsList]) => (
-                            <div key={category}>
-                                <h3>• {category}</h3>
-                                {skillsList.map(skill => (
-                                    <p key={skill.id}>
-                                        <img src={`/images/${skill.iconUrl}`} alt={skill.name} className="skill-icon" /> {skill.name}
-                                    </p>
-                                ))}
-                            </div>
-                        ))
-                    }
-                </div>
+        <Layout title={t.titles.skills}>
+            <div className="skills-grid">
+                {Object.entries(groupedSkills).map(([category, skillsList], index) => {
+                    const CategoryIcon = categoryIcons[category];
+                    return (
+                        <section className="skill-category reveal" key={category} style={{ '--i': index }}>
+                            <h2>
+                                <CategoryIcon size={18} strokeWidth={2.5} aria-hidden="true" />
+                                {t.skills.categories[category]}
+                            </h2>
+                            <ul>
+                                {skillsList.map(skill => {
+                                    const SkillIcon = skillIcons[skill.lucideIcon];
+                                    return (
+                                        <li key={skill.id} className="skill-item">
+                                            {SkillIcon ? (
+                                                <SkillIcon className="skill-lucide" size={28} strokeWidth={2} aria-hidden="true" />
+                                            ) : (
+                                                <img src={`/images/${skill.iconUrl}`} alt="" />
+                                            )}
+                                            {tr(skill.name)}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </section>
+                    );
+                })}
             </div>
-        </div>
+        </Layout>
     );
 }
 

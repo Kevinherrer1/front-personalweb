@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "role": { "es": "Desarrollador web", "en": "Web developer" },
+    "company": "Corporación Venezolana de Guayana (CVG)",
+    "start": "2023",
+    "end": null,
+    "icon": "Building2",
+    "description": {
+      "es": "Desarrollo y mantenimiento de sistemas web institucionales para la corporación.",
+      "en": "Development and maintenance of institutional web systems for the corporation."
+    },
+    "highlights": [
+      {
+        "es": "Sistema POAI: diseño y desarrollo desde cero de una solución web para automatizar y gestionar el Plan Operativo Anual Institucional.",
+        "en": "POAI system: designed and built from scratch a web solution to automate and manage the Institutional Annual Operating Plan."
+      },
+      {
+        "es": "Sistema GESCORPRH: desarrollo de los módulos de Beneficiarios y Tallas / Uniformes en Laravel, sobre la base de datos centralizada de trabajadores.",
+        "en": "GESCORPRH system: built the Beneficiaries and Sizes / Uniforms modules in Laravel, on top of the centralized employee database."
+      },
+      {
+        "es": "Sistema SIBI: mantenimiento y optimización de un sistema legacy en PHP y PostgreSQL, mejorando su lógica y garantizando su continuidad operativa.",
+        "en": "SIBI system: maintained and optimized a legacy PHP and PostgreSQL system, improving its logic and keeping it running."
+      }
+    ],
+    "tags": ["Laravel", "PHP", "WordPress", "JavaScript", "MySQL", "PostgreSQL"]
+  },
+  {
+    "id": 2,
+    "role": { "es": "Desarrollador (servicio comunitario)", "en": "Developer (community service)" },
+    "company": "UNEG · Villa Asia",
+    "start": "2025",
+    "end": "2025",
+    "icon": "HeartPulse",
+    "description": {
+      "es": "Desarrollo en equipo del sistema web del módulo de salud de la universidad, con backend en Laravel, panel administrativo en Filament y frontend en React mediante Inertia.",
+      "en": "Team development of the university health module's web system, with a Laravel backend, a Filament admin panel and a React frontend through Inertia."
+    },
+    "highlights": [],
+    "tags": ["Laravel", "Filament", "React", "Inertia.js", "Docker"]
+  }
+]

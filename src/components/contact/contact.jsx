@@ -1,113 +1,52 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { API_ENDPOINTS } from '../../config/api';
+import React from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import './contact.css';
-import '../menu/Menu.css';
-import Menu from '../menu/Menu';
+import Layout from '../layout/Layout';
+import { useLanguage } from '../../i18n/useLanguage';
 import avatar from './assets/avatar2.JPG';
 import linkedin from './assets/linkedin.png';
 import gmail from './assets/gmail.png';
 import github from './assets/github.png';
 
+const contactLinks = [
+  { label: 'GitHub', value: 'Kevinherrer1', href: 'https://github.com/kevinherrer1', icon: github, external: true },
+  { label: 'LinkedIn', value: 'Kevin Herrera Mantilla', href: 'https://www.linkedin.com/in/kevin-herrera-mantilla-9495633a6/', icon: linkedin, external: true },
+  { labelKey: 'email', value: 'kevinherrerak14@gmail.com', icon: gmail, external: true },
+];
+
+const gmailComposeUrl = (to, subject, body) =>
+  `https://mail.google.com/mail/u/0/?tf=cm&to=${encodeURIComponent(to)}` +
+  `&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
 function Contact() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const { user, token, isAuthenticated } = useAuth();
-  const [message, setMessage] = useState('');
-  const [status, setStatus] = useState({ type: '', message: ''}); // success o error
-
-  const handleMessageSubmit = async (e) => {
-    e.preventDefault();
-    if (!message) return;
-    setStatus({ type: '', message: '' });
-
-    console.log("Enviando token:", token);
-
-    try {
-      const response = await fetch(API_ENDPOINTS.MESSAGES, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ content: message }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'No se pudo enviar el mensaje.');
-      }
-
-      setMessage('');
-      setStatus({ type: 'success', message: '¡Mensaje enviado con éxito!' });
-    } catch (error) {
-      setStatus({ type: 'error', message: error.message });
-    }
-  };
-
-  const toggleMenu = () => {
-    setMenuOpen(prev => !prev);
-  };
+  const { t } = useLanguage();
+  const getHref = (link) =>
+    link.href ?? gmailComposeUrl(link.value, t.contact.emailSubject, t.contact.emailBody);
 
   return (
-    <div className="container">
-      <aside className="menu">
-        <Menu />
-      </aside>
-
-      <main className="content">
-        <button className="menu-toggle" onClick={toggleMenu}>☰ Menú</button>
-        <div className="mobile-menu-wrapper">
-          <nav className={`menu mobile-menu ${menuOpen ? 'show' : ''}`}>
-            <Menu isMobile={true} onLinkClick={() => setMenuOpen(false)} />
-          </nav>
+    <Layout title={t.titles.contact}>
+      <div className="contact-body">
+        <img src={avatar} alt="Kevin Herrera" className="contact-avatar reveal" />
+        <div className="contact-info">
+          {contactLinks.map((link, index) => (
+            <a
+              key={link.value}
+              href={getHref(link)}
+              className="box reveal"
+              style={{ '--i': index + 1 }}
+              {...(link.external && { target: '_blank', rel: 'noopener noreferrer' })}
+            >
+              <img src={link.icon} className="contact-icon" alt="" />
+              <span className="box-text">
+                <span className="box-label">{link.labelKey ? t.contact[link.labelKey] : link.label}</span>
+                <span className="box-value">{link.value}</span>
+              </span>
+              <ArrowUpRight className="box-arrow" size={22} strokeWidth={2.5} aria-hidden="true" />
+            </a>
+          ))}
         </div>
-
-        <h1>≫ CONTACTO ≪</h1>
-        
-        {isAuthenticated ? (
-          <div className="contact-form-container">
-            <h3>¡Hola, {user?.username}! Envíame un mensaje:</h3>
-            <form onSubmit={handleMessageSubmit} className="contact-form">
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Escribe tu mensaje aquí..."
-                required
-              />
-              <button type="submit" className="submit-btn">Enviar Mensaje</button>
-            </form>
-            {status.message && <p className={`status-${status.type}`}>{status.message}</p>}
-          </div>
-        ) : (
-          <div className="login-prompt">
-            <p>Debes <Link to="/auth">iniciar sesión</Link> para poder enviar un mensaje.</p>
-          </div>
-        )}
-
-        <div className="contact-body">
-          <img src={avatar} alt="Avatar" className="avatar" />
-          <div className="contact-info">
-            
-            <a href="https://github.com/kevinherrer1" target="_blank" rel="noopener noreferrer" className="box">
-              <p>• GitHub</p>
-              <p><img src={github} className="icon" alt="GitHub" /> Kevinherrer1</p>
-            </a>
-
-            <a href="https://www.linkedin.com/in/kevinherrera" target="_blank" rel="noopener noreferrer" className="box">
-              <p>• LinkedIn</p>
-              <p><img src={linkedin} className="icon" alt="LinkedIn" /> Kevin Herrera</p>
-            </a>
-
-            <a href="mailto:kevinherrerak14@gmail.com" className="box">
-              <p>• Correo electrónico</p>
-              <p><img src={gmail} className="icon" alt="Gmail" /> kevinherrerak14@gmail.com</p>
-            </a>
-          </div>
-        </div>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

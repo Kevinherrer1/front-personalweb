@@ -1,13 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --color-primary: #561445;
+  --color-primary-light: #7a1d62;
+  --color-primary-dark: #3a0931;
+  --color-accent: #a80000;
+  --color-accent-light: #e01010;
+  --color-highlight: #ffd23f;
+  --color-active: #90ee90;
+  --color-panel: #e2ceac;
+  --color-card: #f3e8d2;
+  --color-ink: #222;
+  --color-menu: #111;
+  --color-menu-text: #e8e8e8;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-text: 'VT323', monospace;
+
+  --shadow-pixel: 8px 8px 0 #000;
+  --shadow-pixel-sm: 4px 4px 0 #000;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 0.25s;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,61 +27,90 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-width: 320px;
   min-height: 100vh;
-  font-family: 'Press Start 2P', cursive;
-  background: linear-gradient(to bottom, #76c442, #0f6e5a);
+  font-family: var(--font-pixel);
   font-size: 16px;
-  padding: 1rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  background-color: #2f8f4e;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 2px, transparent 2px),
+    linear-gradient(to bottom, #76c442, #0f6e5a);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+  background-attachment: fixed;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+img {
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 3px dashed var(--color-highlight);
+  outline-offset: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reveal {
+  animation: reveal 0.5s var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms + 100ms);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  a:hover {
-    color: #747bff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  button {
-    background-color: #f9f9f9;
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

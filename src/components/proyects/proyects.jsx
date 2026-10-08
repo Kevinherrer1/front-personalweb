@@ -1,77 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { CodeXml, ExternalLink } from 'lucide-react';
 import './proyects.css';
-import '../menu/Menu.css';
-import Menu from '../menu/Menu';
-import { Link } from 'react-router-dom';
+import Layout from '../layout/Layout';
+import { useLanguage } from '../../i18n/useLanguage';
 import githubIcon from './assets/githubicon.png';
-import { API_ENDPOINTS } from '../../config/api';
+import projects from '../../data/projects.json';
 
 function Proyects() {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [projects, setProjects] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                setLoading(true);
-                setError(null);
-                const response = await fetch(API_ENDPOINTS.PROJECTS);
-                if (!response.ok) {
-                    throw new Error('No se pudieron cargar los proyectos desde el servidor.');
-                }
-                const data = await response.json();
-                setProjects(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchProjects();
-    }, []);
-
-    const toggleMenu = () => {
-        setMenuOpen(prev => !prev);
-    };
+    const { t, tr } = useLanguage();
 
     return (
-        <div className='container'>
-            <aside className="menu">
-                <Menu />
-            </aside>
-
-            <div className="proyects-container">
-                {/* Botón para móvil */}
-                <button className="menu-toggle" onClick={toggleMenu}>
-                    ☰ Menú
-                </button>
-                {/* Menú móvil siempre en el DOM */}
-                <div className="mobile-menu-wrapper">
-                    <nav className={`menu mobile-menu ${menuOpen ? 'show' : ''}`}>
-                        <Menu isMobile={true} onLinkClick={() => setMenuOpen(false)} />
-                    </nav>
-                </div>
-                <h1>»» PROYECTOS ««</h1>
-                <div className="proyects-lista">
-                    {loading && <p>Cargando proyectos...</p>}
-                    {error && <p className="error-mensaje">{error}</p>}
-                    {!loading && !error && projects.map(project => (
-                        <div className="proyecto" key={project.id}>
-                            <img src={githubIcon} alt="GitHub" className="icon" />
-                            <div>
-                                <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
-                                    <strong className="titulo-proyecto">• {project.title}</strong>
-                                </a>
-                                <p>{project.description}</p>
+        <Layout title={t.titles.projects}>
+            <div className="proyecto-lista">
+                {projects.map((project, index) => (
+                    <article className="proyecto reveal" key={project.id} style={{ '--i': index }}>
+                        <img src={githubIcon} alt="" className="proyecto-icon" />
+                        <div className="proyecto-body">
+                            <h2 className="titulo-proyecto">{tr(project.title)}</h2>
+                            <p>{tr(project.description)}</p>
+                            <ul className="proyecto-tags">
+                                {project.tags.map(tag => (
+                                    <li key={tr(tag)}>{tr(tag)}</li>
+                                ))}
+                            </ul>
+                            <div className="proyecto-links">
+                                {project.links.map(link => {
+                                    const LinkIcon = link.url.includes('github.com') ? CodeXml : ExternalLink;
+                                    return (
+                                        <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">
+                                            <LinkIcon size={16} strokeWidth={2.5} aria-hidden="true" />
+                                            {tr(link.label)}
+                                        </a>
+                                    );
+                                })}
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </article>
+                ))}
             </div>
-        </div>
+        </Layout>
     );
 }
 

@@ -1,0 +1,23 @@
+.typewriter {
+  display: inline-grid;
+}
+
+.typewriter-ghost,
+.typewriter-text {
+  grid-area: 1 / 1;
+}
+
+.typewriter-ghost {
+  visibility: hidden;
+}
+
+.typewriter-cursor {
+  color: var(--color-primary);
+  animation: typewriter-blink 1s steps(2) infinite;
+}
+
+@keyframes typewriter-blink {
+  50% {
+    opacity: 0;
+  }
+}

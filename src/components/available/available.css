@@ -1,0 +1,39 @@
+.available-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background-color: #0e2a14;
+  color: var(--color-active);
+  border: 2px solid var(--color-active);
+  font-family: var(--font-text);
+  font-size: 19px;
+  line-height: 1;
+}
+
+.available-dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #3ddc5f;
+}
+
+.available-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #3ddc5f;
+  animation: available-pulse 1.6s var(--ease-out) infinite;
+}
+
+@keyframes available-pulse {
+  from {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}

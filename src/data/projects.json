@@ -1,0 +1,88 @@
+[
+  {
+    "id": 1,
+    "title": { "es": "Portafolio Full-Stack", "en": "Full-Stack Portfolio" },
+    "description": {
+      "es": "Este mismo portafolio. Frontend en React con estética retro y una API REST en NestJS con autenticación JWT, base de datos PostgreSQL mediante TypeORM y despliegue en Render.",
+      "en": "This very portfolio. A retro-styled React frontend and a NestJS REST API with JWT authentication, a PostgreSQL database through TypeORM, deployed on Render."
+    },
+    "tags": ["React", "Vite", "NestJS", "TypeScript", "TypeORM", "PostgreSQL", "JWT", "Render"],
+    "links": [
+      { "label": { "es": "Demo", "en": "Live demo" }, "url": "https://front-personalweb.onrender.com" },
+      { "label": { "es": "Código frontend", "en": "Frontend code" }, "url": "https://github.com/Kevinherrer1/front-personalweb" },
+      { "label": { "es": "Código API", "en": "API code" }, "url": "https://github.com/Kevinherrer1/api-personalweb" }
+    ]
+  },
+  {
+    "id": 2,
+    "title": { "es": "Tienda de postres y ropa", "en": "Desserts & clothing store" },
+    "description": {
+      "es": "Tienda web con catálogo de productos administrable desde un CMS (Sanity), construida con Next.js y TypeScript, con interfaz en Tailwind CSS y despliegue en Cloudflare.",
+      "en": "Online store with a product catalog managed from a CMS (Sanity), built with Next.js and TypeScript, styled with Tailwind CSS and deployed on Cloudflare."
+    },
+    "tags": ["Next.js", "TypeScript", "Sanity CMS", "Tailwind CSS", "shadcn/ui", "Cloudflare"],
+    "links": [
+      { "label": { "es": "Código", "en": "Code" }, "url": "https://github.com/Kevinherrer1/tienda-postres-ropa" }
+    ]
+  },
+  {
+    "id": 3,
+    "title": { "es": "Damas contra IA (Minimax)", "en": "Checkers vs AI (Minimax)" },
+    "description": {
+      "es": "Juego de Damas en el que una persona compite contra una inteligencia artificial que decide sus jugadas con el algoritmo Minimax y poda Alfa-Beta.",
+      "en": "Checkers game where a person plays against an AI that chooses its moves with the Minimax algorithm and Alpha-Beta pruning."
+    },
+    "tags": ["Python", "Minimax", { "es": "Poda Alfa-Beta", "en": "Alpha-Beta pruning" }],
+    "links": [
+      { "label": { "es": "Código", "en": "Code" }, "url": "https://github.com/Kevinherrer1/checkers-minimax-ai" }
+    ]
+  },
+  {
+    "id": 4,
+    "title": { "es": "Damas con IA (Q-Learning)", "en": "Checkers AI (Q-Learning)" },
+    "description": {
+      "es": "Agente autónomo que aprende a jugar Damas en un tablero de 4x4 mediante aprendizaje por refuerzo, mejorando su rendimiento a medida que juega más partidas.",
+      "en": "Autonomous agent that learns to play Checkers on a 4x4 board through reinforcement learning, improving its performance as it plays more games."
+    },
+    "tags": ["Python", "Q-Learning", { "es": "Aprendizaje por refuerzo", "en": "Reinforcement learning" }],
+    "links": [
+      { "label": { "es": "Código", "en": "Code" }, "url": "https://github.com/Kevinherrer1/damas-Q-learning" }
+    ]
+  },
+  {
+    "id": 5,
+    "title": { "es": "Sistema de supermercado con Cassandra", "en": "Supermarket system with Cassandra" },
+    "description": {
+      "es": "Aplicación web para gestionar clientes, productos y facturas de un supermercado, usando Cassandra como base de datos.",
+      "en": "Web application to manage a supermarket's customers, products and invoices, using Cassandra as the database."
+    },
+    "tags": ["Python", "Flask", "Cassandra"],
+    "links": [
+      { "label": { "es": "Código", "en": "Code" }, "url": "https://github.com/Callaquenoveo/Proyecto-Cassandra" }
+    ]
+  },
+  {
+    "id": 6,
+    "title": { "es": "Módulo de salud UNEG (servicio comunitario)", "en": "UNEG health module (community service)" },
+    "description": {
+      "es": "Sistema web desarrollado en equipo para el módulo de salud de la UNEG sede Villa Asia, como proyecto de servicio comunitario. Backend en Laravel con panel administrativo en Filament y frontend en React mediante Inertia.",
+      "en": "Web system built as a team for the health module of UNEG's Villa Asia campus, as a community service project. Laravel backend with a Filament admin panel and a React frontend through Inertia."
+    },
+    "tags": ["Laravel", "PHP", "React", "Inertia.js", "TypeScript", "Filament", "Tailwind CSS", "Docker"],
+    "links": [
+      { "label": { "es": "Código", "en": "Code" }, "url": "https://github.com/Pablish2001/servicio-comunitario" }
+    ]
+  },
+  {
+    "id": 7,
+    "title": { "es": "Predicción de tiempos de entrega", "en": "Delivery time prediction" },
+    "description": {
+      "es": "Modelo de aprendizaje automático que predice el tiempo de entrega en un servicio de delivery a partir de datos históricos.",
+      "en": "Machine learning model that predicts delivery times for a delivery service based on historical data."
+    },
+    "tags": ["Python", "TensorFlow", "scikit-learn", "Pandas"],
+    "links": [
+      { "label": { "es": "Código", "en": "Code" }, "url": "https://github.com/Kevinherrer1/ProyectoIO_IA" }
+    ]
+  }
+]
